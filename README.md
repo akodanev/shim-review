@@ -64,7 +64,9 @@ Yes, we are using 15.7 release.
 *******************************************************************************
 ### URL for a repo that contains the exact code which was built to get this binary:
 *******************************************************************************
-https://github.com/bell-sw/alpaquita-aports/tree/stream/core/shim
+https://github.com/rhboot/shim/tree/15.7
+
+Additional patches: https://github.com/akodanev/shim-review/tree/alpaquita-shim-x64-20230322/patches
 
 *******************************************************************************
 ### What patches are being applied and why:
@@ -180,7 +182,7 @@ N/A. This is the first review request from us.
 *******************************************************************************
 ### What is the SHA256 hash of your final SHIM binary?
 *******************************************************************************
-`53cc37462109fab5fc78bf01e0b3f1721f41f3cfccb748aa707914fdb7a50be8`
+`e8995c52597b49639b12f6d954141280c2d2fc2ba1e1e7761c0af65e44e1a102`
 
 *******************************************************************************
 ### How do you manage and protect the keys used in your SHIM?
@@ -201,14 +203,14 @@ shim:
 ```
 sbat,1,SBAT Version,sbat,1,https://github.com/rhboot/shim/blob/main/SBAT.md
 shim,3,UEFI shim,shim,1,https://github.com/rhboot/shim
-shim.alpaquita,1,Alpaquita Linux,shim,15.7-r2,https://bell-sw.com/support/
+shim.alpaquita,1,Alpaquita Linux,shim,15.7,https://bell-sw.com/support/
 ```
 
 grub:
 ```
 sbat,1,SBAT Version,sbat,1,https://github.com/rhboot/shim/blob/main/SBAT.md
 grub,3,Free Software Foundation,grub,2.06,https//www.gnu.org/software/grub/
-grub.alpaquita,1,Alpaquita Linux,grub,2.06-r10,https://bell-sw.com/support/
+grub.alpaquita,1,Alpaquita Linux,grub,2.06-r14,https://bell-sw.com/support/
 ```
 
 fwupd: currently not supported.
@@ -229,9 +231,9 @@ usbserial_pl2303 usbserial_usbdebug video xfs zfsinfo zstd`
 *******************************************************************************
 ### What is the origin and full version number of your bootloader (GRUB or other)?
 *******************************************************************************
-Full version: `grub-2.06-r10`
+Full version: `grub-2.06-r14`
 
-Our GRUB is based on Alpine version 2.06-r6. Currenly, they don't have the shim
+Our GRUB is based on Alpine version 2.06-r9. Currenly, they don't have the shim
 package and the sbat section in grub.
 
 GRUB source: https://github.com/bell-sw/alpaquita-aports/tree/stream/core/grub

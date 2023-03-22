@@ -12,12 +12,12 @@ Confirm the following are included in your repo, checking each box:
 *******************************************************************************
 ### What is the link to your tag in a repo cloned from rhboot/shim-review?
 *******************************************************************************
-`https://github.com/akodanev/shim-review/tree/alpaquita-shim-x64-20230310`
+`https://github.com/akodanev/shim-review/tree/alpaquita-shim-x64-20230322`
 
 *******************************************************************************
 ### What is the SHA256 hash of your final SHIM binary?
 *******************************************************************************
-53cc37462109fab5fc78bf01e0b3f1721f41f3cfccb748aa707914fdb7a50be8
+e8995c52597b49639b12f6d954141280c2d2fc2ba1e1e7761c0af65e44e1a102
 
 *******************************************************************************
 ### What is the link to your previous shim review request (if any, otherwise N/A)?
