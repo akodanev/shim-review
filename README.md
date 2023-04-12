@@ -66,7 +66,7 @@ Yes, we are using 15.7 release.
 *******************************************************************************
 https://github.com/rhboot/shim/tree/15.7
 
-Additional patches: https://github.com/akodanev/shim-review/tree/alpaquita-shim-x64-20230322/patches
+Additional patches: https://github.com/akodanev/shim-review/tree/alpaquita-shim-x64-20230412/patches
 
 *******************************************************************************
 ### What patches are being applied and why:
@@ -78,7 +78,7 @@ Additional patches: https://github.com/akodanev/shim-review/tree/alpaquita-shim-
 *******************************************************************************
 ### If shim is loading GRUB2 bootloader what exact implementation of Secureboot in GRUB2 do you have? (Either Upstream GRUB2 shim_lock verifier or Downstream RHEL/Fedora/Debian/Canonical-like implementation)
 *******************************************************************************
-Upstream GRUB2 shim_lock verifier.
+Fedora-like implementation.
 
 *******************************************************************************
 ### If shim is loading GRUB2 bootloader and your previously released shim booted a version of grub affected by any of the CVEs in the July 2020 grub2 CVE list, the March 2021 grub2 CVE list, the June 7th 2022 grub2 CVE list, or the November 15th 2022 list, have fixes for all these CVEs been applied?
@@ -133,7 +133,7 @@ with the new SBAT revocation data (`grub,3`).
 ### Is upstream commit [eadb2f47a3ced5c64b23b90fd2a3463f63726066 "lockdown: also lock down previous kgdb use"](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=eadb2f47a3ced5c64b23b90fd2a3463f63726066) applied?
 *******************************************************************************
 All of the above commits are present. Currently, we are using the upstream stable
-v6.1.15 from https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git.
+v6.1.22 from https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git.
 
 *******************************************************************************
 ### Do you build your signed kernel with additional local patches? What do they do?
@@ -210,7 +210,7 @@ grub:
 ```
 sbat,1,SBAT Version,sbat,1,https://github.com/rhboot/shim/blob/main/SBAT.md
 grub,3,Free Software Foundation,grub,2.06,https//www.gnu.org/software/grub/
-grub.alpaquita,1,Alpaquita Linux,grub,2.06-r14,https://bell-sw.com/support/
+grub.alpaquita,1,Alpaquita Linux,grub,2.06-r15,https://bell-sw.com/support/
 ```
 
 fwupd: currently not supported.
@@ -231,12 +231,20 @@ usbserial_pl2303 usbserial_usbdebug video xfs zfsinfo zstd`
 *******************************************************************************
 ### What is the origin and full version number of your bootloader (GRUB or other)?
 *******************************************************************************
-Full version: `grub-2.06-r14`
+Full version: `grub-2.06-r15`
 
-Our GRUB is based on Alpine version 2.06-r9. Currenly, they don't have the shim
-package and the sbat section in grub.
+Our GRUB is based on Alpine version 2.06-r9. Currently, they don't have the
+shim package and the sbat section in grub. CVE fixes, EFI and Secure Boot
+related patches cherry-picked from Fedora.
 
 GRUB source: https://github.com/bell-sw/alpaquita-aports/tree/stream/core/grub
+
+Patch numbering scheme in the source:
+
+ * 0004..0292: Fedora (https://src.fedoraproject.org/rpms/grub2/tree/rawhide)
+ * 1001..1016: cherry-picked upstream fixes
+ * 1017..1023: Alpine patches
+ * 1101      : Alpaquita specific
 
 *******************************************************************************
 ### If your SHIM launches any other components, please provide further details on what is launched.
