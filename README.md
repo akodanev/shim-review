@@ -66,7 +66,7 @@ Yes, we are using 15.7 release.
 *******************************************************************************
 https://github.com/rhboot/shim/tree/15.7
 
-Additional patches: https://github.com/akodanev/shim-review/tree/alpaquita-shim-x64-20230412/patches
+Additional patches: https://github.com/akodanev/shim-review/tree/alpaquita-shim-x64-20231010/patches
 
 *******************************************************************************
 ### What patches are being applied and why:
@@ -117,7 +117,8 @@ https://github.com/bell-sw/alpaquita-aports/tree/stream/core/grub
 *******************************************************************************
 ### If these fixes have been applied, have you set the global SBAT generation on your GRUB binary to 3?
 *******************************************************************************
-Yes, it is now `grub,3`.
+Now, it is `grub,4`, as there have been new fixes for grub ntfs driver recently:
+CVE-2023-4693 and CVE-2023-4692.
 
 *******************************************************************************
 ### Were old shims hashes provided to Microsoft for verification and to be added to future DBX updates?
@@ -133,7 +134,7 @@ with the new SBAT revocation data (`grub,3`).
 ### Is upstream commit [eadb2f47a3ced5c64b23b90fd2a3463f63726066 "lockdown: also lock down previous kgdb use"](https://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git/commit/?id=eadb2f47a3ced5c64b23b90fd2a3463f63726066) applied?
 *******************************************************************************
 All of the above commits are present. Currently, we are using the upstream stable
-v6.1.22 from https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git.
+v6.1.56 from https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git.
 
 *******************************************************************************
 ### Do you build your signed kernel with additional local patches? What do they do?
@@ -153,7 +154,7 @@ https://github.com/bell-sw/alpaquita-aports/tree/stream/core/linux-lts
 ### Do you use an ephemeral key for signing kernel modules?
 ### If not, please describe how you ensure that one kernel build does not load modules built for another kernel.
 *******************************************************************************
-[your text here]
+Yes, build time generated key.
 
 *******************************************************************************
 ### If you use vendor_db functionality of providing multiple certificates and/or hashes please briefly describe your certificate setup.
@@ -215,8 +216,8 @@ shim.alpaquita,1,Alpaquita Linux,shim,15.7,https://bell-sw.com/support/
 grub:
 ```
 sbat,1,SBAT Version,sbat,1,https://github.com/rhboot/shim/blob/main/SBAT.md
-grub,3,Free Software Foundation,grub,2.06,https//www.gnu.org/software/grub/
-grub.alpaquita,1,Alpaquita Linux,grub,2.06-r15,https://bell-sw.com/support/
+grub,4,Free Software Foundation,grub,2.06,https//www.gnu.org/software/grub/
+grub.alpaquita,1,Alpaquita Linux,grub,2.06-r18,https://bell-sw.com/support/
 ```
 
 fwupd: currently not supported.
@@ -224,22 +225,20 @@ fwupd: currently not supported.
 *******************************************************************************
 ### Which modules are built into your signed grub image?
 *******************************************************************************
-`all_video at_keyboard backtrace boot btrfs cat chain configfile cryptodisk
-disk echo efifwsetup efi_gop efinet efi_uga ext2 f2fs fat font gcry_rijndael
-gcry_rsa gcry_serpent gcry_sha256 gcry_sha512 gcry_twofish gcry_whirlpool
-gfxmenu gfxterm gzio halt help hfsplus http iso9660 jpeg keylayouts linux
-loadenv loopback ls lsefi lsefimmap luks luks2 lvm mdraid09 mdraid1x minicmd
-multiboot2 net normal part_apple part_gpt part_msdos password_pbkdf2 png
-reboot regexp search search_fs_file search_fs_uuid search_label serial sleep
-syslinuxcfg test tftp tpm true usb usbserial_common usbserial_ftdi
-usbserial_pl2303 usbserial_usbdebug video xfs zfsinfo zstd`
+`all_video at_keyboard boot btrfs cat configfile cryptodisk disk echo efifwsetup
+efinet ext2 f2fs fat font gcry_rijndael gcry_rsa gcry_serpent gcry_sha256 gcry_sha512
+gcry_twofish gcry_whirlpool gfxmenu gfxterm gzio halt help hfsplus http iso9660 jpeg
+linux loadenv loopback ls lsefi lsefimmap luks lvm mdraid09 mdraid1x memdisk minicmd
+normal part_apple part_gpt part_msdos password_pbkdf2 png reboot regexp search
+search_fs_file search_fs_uuid search_label serial sleep squash4 test tftp true
+video xfs zstd`
 
 *******************************************************************************
 ### What is the origin and full version number of your bootloader (GRUB or other)?
 *******************************************************************************
-Full version: `grub-2.06-r15`
+Full version: `grub-2.06-r18`
 
-Our GRUB is based on Alpine version 2.06-r9. Currently, they don't have the
+Our GRUB is based on Alpine version 2.06-r14. Currently, they don't have the
 shim package and the sbat section in grub. CVE fixes, EFI and Secure Boot
 related patches cherry-picked from Fedora.
 
@@ -250,6 +249,7 @@ Patch numbering scheme in the source:
  * 0004..0292: Fedora (https://src.fedoraproject.org/rpms/grub2/tree/rawhide)
  * 1001..1016: cherry-picked upstream fixes
  * 1017..1023: Alpine patches
+ * 1030..1035: cherry-picked upstream fixes for NTFS (CVE-2023-4693, CVE-2023-4692)
  * 1101      : Alpaquita specific
 
 *******************************************************************************
