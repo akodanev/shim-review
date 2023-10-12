@@ -66,7 +66,7 @@ Yes, we are using 15.7 release.
 *******************************************************************************
 https://github.com/rhboot/shim/tree/15.7
 
-Additional patches: https://github.com/akodanev/shim-review/tree/alpaquita-shim-x64-20231010/patches
+Additional patches: https://github.com/akodanev/shim-review/tree/alpaquita-shim-x64-20231012/patches
 
 *******************************************************************************
 ### What patches are being applied and why:
@@ -217,7 +217,8 @@ grub:
 ```
 sbat,1,SBAT Version,sbat,1,https://github.com/rhboot/shim/blob/main/SBAT.md
 grub,4,Free Software Foundation,grub,2.06,https//www.gnu.org/software/grub/
-grub.alpaquita,1,Alpaquita Linux,grub,2.06-r18,https://bell-sw.com/support/
+grub.rh,2,Red Hat,grub2,2.06-102.fc38,mailto:secalert@redhat.com
+grub.alpaquita,1,Alpaquita Linux,grub,2.06-r19,https://bell-sw.com/support/
 ```
 
 fwupd: currently not supported.
@@ -236,7 +237,7 @@ video xfs zstd`
 *******************************************************************************
 ### What is the origin and full version number of your bootloader (GRUB or other)?
 *******************************************************************************
-Full version: `grub-2.06-r18`
+Full version: `grub-2.06-r19`
 
 Our GRUB is based on Alpine version 2.06-r14. Currently, they don't have the
 shim package and the sbat section in grub. CVE fixes, EFI and Secure Boot
