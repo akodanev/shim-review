@@ -97,7 +97,7 @@ No.
 ### What exact implementation of Secure Boot in GRUB2 do you have? (Either Upstream GRUB2 shim_lock verifier or Downstream RHEL/Fedora/Debian/Canonical-like implementation)
 Skip this, if you're not using GRUB2.
 *******************************************************************************
-Fedora-like implementation.
+Upstream GRUB2 shim_lock verifier.
 
 *******************************************************************************
 ### Do you have fixes for all the following GRUB2 CVEs applied?
@@ -142,7 +142,7 @@ Fedora-like implementation.
   * CVE-2023-4693
   * CVE-2023-4692
 *******************************************************************************
-Yes, our GRUB includes fixes for the above CVE list.
+Yes, our GRUB (grub-2.12) includes fixes for the above CVE list.
 The applied patches are here:
 https://github.com/bell-sw/alpaquita-aports/tree/stream/core/grub
 
@@ -169,7 +169,7 @@ Hint: upstream kernels should have all these applied, but if you ship your own h
 If you are shipping an older kernel, double-check your sources; maybe you do not have all the patches, but ship a configuration, that does not expose the issue(s).
 *******************************************************************************
 All of the above commits are present. Currently, we are using the upstream stable
-v6.1.87 from https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git.
+v6.1.91 from https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux.git.
 
 *******************************************************************************
 ### Do you build your signed kernel with additional local patches? What do they do?
@@ -228,7 +228,14 @@ For example, signing new kernel's variants, UKI, systemd-boot, new certs, new CA
 
 Skip this, if this is your first application for having shim signed.
 *******************************************************************************
-The new aarch64 build.
+
+Addition of aarch64 builds and rebase to upstream grub-2.12 release (previously used
+Fedora-like grub-2.06).
+
+On top of grub-2.12, there are Debian/Ubuntu peimage patches, resulting in a
+new entry in grub's sbat: `grub.peimage,2`. Note that we did not sign/ship the
+older `grub.peimage,1` version that was affected by CVE-2024-2312. Therefore,
+didn't revoke it in our shim.
 
 *******************************************************************************
 ### What is the SHA256 hash of your final shim binary?
@@ -271,9 +278,9 @@ shim.alpaquita,1,Alpaquita Linux,shim,15.8,https://bell-sw.com/support/
 grub:
 ```
 sbat,1,SBAT Version,sbat,1,https://github.com/rhboot/shim/blob/main/SBAT.md
-grub,4,Free Software Foundation,grub,2.06,https//www.gnu.org/software/grub/
-grub.rh,2,Red Hat,grub2,2.06-102.fc38,mailto:secalert@redhat.com
-grub.alpaquita,1,Alpaquita Linux,grub,2.06-r25,https://bell-sw.com/support/
+grub,4,Free Software Foundation,grub,2.12,https//www.gnu.org/software/grub/
+grub.alpaquita,1,Alpaquita Linux,grub,2.12-r1,https://bell-sw.com/support/
+grub.peimage,2,Canonical,grub2,2.12-2,https://salsa.debian.org/grub-team/grub/-/blob/master/debian/patches/secure-boot/efi-use-peimage-shim.patch
 ```
 
 fwupd: currently not supported.
@@ -300,21 +307,18 @@ We do not use systemd-boot.
 *******************************************************************************
 ### What is the origin and full version number of your bootloader (GRUB2 or systemd-boot or other)?
 *******************************************************************************
-Full version: `grub-2.06-r25`
+Full version: `grub-2.12-r1`
 
-Our GRUB is based on Alpine version 2.06-r17. Currently, they don't have the
-shim package and the sbat section in grub. CVE fixes, EFI and Secure Boot
-related patches cherry-picked from Fedora (so grub.rh is included in sbat).
+Our GRUB is based on Alpine version 2.12-r3. Currently, Alpine doesn't have the
+shim package and the sbat section in grub.
 
 GRUB source: https://github.com/bell-sw/alpaquita-aports/tree/stream/core/grub
 
 Patch numbering scheme in the source:
 
- * 0004..0292: Fedora (https://src.fedoraproject.org/rpms/grub2/tree/f38)
- * 1001..1016: cherry-picked upstream fixes
- * 1017..1023: Alpine patches
- * 1030..1035: cherry-picked upstream fixes for NTFS (CVE-2023-4693, CVE-2023-4692)
- * 1101      : Alpaquita specific
+ * 0001..0099    : Alpine patches
+ * 0100..        : cherry-picked upstream fixes
+ * secure-boot/* : Debian/Ubuntu peimage patches
 
 *******************************************************************************
 ### If your shim launches any other components apart from your bootloader, please provide further details on what is launched.
