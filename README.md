@@ -360,7 +360,8 @@ A reasonable timeframe of waiting for a review can reach 2-3 months. Helping us 
 
 For newcomers, the applications labeled as [*easy to review*](https://github.com/rhboot/shim-review/issues?q=is%3Aopen+is%3Aissue+label%3A%22easy+to+review%22) are recommended to start the contribution process.
 *******************************************************************************
-[your text here]
+
+[debian-13-shim-amd64-arm64-20240512](https://github.com/rhboot/shim-review/issues/415#issuecomment-2155135414) submission has been reviewed.
 
 *******************************************************************************
 ### Add any additional information you think we may need to validate this shim signing application.
